@@ -1,5 +1,7 @@
 <?php
+
 namespace Deployer;
+
 require 'recipe/symfony.php';
 
 // Configuration
@@ -7,7 +9,7 @@ require 'recipe/symfony.php';
 set('ssh_type', 'native');
 set('ssh_multiplexing', true);
 
-set('repository', 'git@domain.com:username/repository.git');
+set('repository', 'git@github.com:kseta/demo-deploy.git');
 
 add('shared_files', []);
 add('shared_dirs', []);
@@ -16,10 +18,11 @@ add('writable_dirs', []);
 
 // Servers
 
-server('production', 'domain.com')
-    ->user('username')
-    ->identityFile()
-    ->set('deploy_path', '/var/www/domain.com')
+// see output this command: vagrant ssh-config
+server('staging', '127.0.0.1', 2230)
+    ->user('ubuntu')
+    ->identityFile('~/.ssh/id_rsa.pub', '/Users/kseta/.ghq/github.com/kseta/demo-deploy/.vagrant/machines/staging/virtualbox/private_key')
+    ->set('deploy_path', '~/demo.com')
     ->pty(true);
 
 
