@@ -3,17 +3,25 @@
 
 Vagrant.configure("2") do |config|
   boxes = {
-    "test" => {
-      "ip" => "192.168.50.10"
+    "deploy" => {
+      "ip" => "192.168.50.10",
+      "port-host" => "2210"
+    },
+    "test1" => {
+      "ip" => "192.168.50.21",
+      "port-host" => "2221"
     },
     "staging" => {
-      "ip" => "192.168.50.11"
+      "ip" => "192.168.50.30",
+      "port-host" => "2230"
     },
     "production1" => {
-      "ip" => "192.168.50.21"
+      "ip" => "192.168.50.41",
+      "port-host" => "2241"
     },
     "production2" => {
-      "ip" => "192.168.50.22"
+      "ip" => "192.168.50.42",
+      "port-host" => "2242"
     }
   }
 
@@ -25,6 +33,7 @@ Vagrant.configure("2") do |config|
 
       # Network settings
       box.vm.network :private_network, ip: values["ip"]
+      box.vm.network "forwarded_port", guest: 22, host: values["port-host"], id: "ssh"
 
       # Shared directory settings
       box.vm.synced_folder ".", "/vagrant", disabled: true
