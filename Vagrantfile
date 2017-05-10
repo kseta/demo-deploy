@@ -36,7 +36,7 @@ Vagrant.configure("2") do |config|
       box.vm.network "forwarded_port", guest: 22, host: values["port-host"], id: "ssh"
 
       # Shared directory settings
-      box.vm.synced_folder ".", "/vagrant", disabled: true
+      box.vm.synced_folder ".", "/vagrant", disabled: false
     end
 
     config.vm.provision "shell",
