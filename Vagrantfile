@@ -38,5 +38,8 @@ Vagrant.configure("2") do |config|
       # Shared directory settings
       box.vm.synced_folder ".", "/vagrant", disabled: true
     end
+
+    config.vm.provision "shell",
+        inline: "apt-get -y install php7.0 php7.0-xml php7.0-zip"
   }
 end
