@@ -6,7 +6,7 @@ require 'recipe/symfony3.php';
 
 // Configuration
 
-set('repository', 'git@github.com:kseta/demo-deploy.git');
+set('repository', 'https://github.com/kseta/demo-deploy.git');
 set('git_tty', true); // [Optional] Allocate tty for git on first deployment
 add('shared_files', []);
 add('shared_dirs', []);
@@ -26,6 +26,9 @@ host('127.0.0.1')
     ->forwardAgent(true)
     ->set('deploy_path', '~/demo.com');
 
+localhost('local')
+    ->stage('local')
+    ->set('deploy_path', '~/demo.com');
 
 // Tasks
 
